@@ -1,0 +1,13 @@
+<h1>Hello Mr. {{user.display_name}} </h1>
+<table class="table">
+    <tbody>
+        {{#each user}}
+        <tr>
+            <th scope="row">1</th>
+            <td>{{@key}}</td>
+            <td>{{this}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{> footer}}
