@@ -17,10 +17,10 @@ router.get('/', authCheck, (req, res) => {
             res.render('userprofile', {
                 loggedIn: true,
                 user: {
-                    fullName: user.display_name,
-                    userName: user.username,
+                    fullName: user.display_name || 'no name stored',
+                    userName: user.username || 'no name stored',
                     email: getEmail(user.emails),
-                    organisation: user.organisation.name
+                    organisation: user.organisation.name || 'no organistion stored'
                 }
             })
         })
