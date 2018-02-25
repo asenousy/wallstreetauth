@@ -58,7 +58,8 @@ app.use('/profile', profileRoutes);
 
 app.get('/homepage', (req, res) => {
   res.render('homepage', {
-    loggedIn: req.user ? true : false
+    loggedIn: req.user ? true : false,
+    pleaseLogin: req.query.pleaselogin
   })
 })
 

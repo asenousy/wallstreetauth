@@ -1,4 +1,4 @@
-    {{> header loggedIn=loggedIn}}
+ {{> header loggedIn=loggedIn}}
 <h1>Hello Mr. {{user.fullName}} </h1>
 <table class="table">
     <tbody>
@@ -10,3 +10,22 @@
         {{/each}}
     </tbody>
 </table>
+
+<div id="div1"></div>
+
+<button>
+    what is my Id
+</button>
+
+<script>
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.get("profile/myid", function (data) {
+                if (data) {
+                    $("#div1").html(`my Id number: ${data}`)
+                    $("button").remove()
+                }
+            })
+        })
+    })
+</script>

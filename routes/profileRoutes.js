@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 
 const authCheck = (req, res, next) => {
     if (!req.user) {
-        res.redirect('/homepage')
+        res.redirect('/homepage?pleaselogin=true')
     } else {
         next()
     }
@@ -23,7 +23,16 @@ router.get('/', authCheck, (req, res) => {
                 }
             })
         })
-        .catch(err => res.redirect('/homepage'))
+        .catch(err => res.redirect('/homepage?loginfailed=true'))
+})
+
+router.get('/myid', authCheck, (req, res) => {
+    fetch('https://staging-auth.wallstreetdocs.com/oauth/userinfo', { headers: { Authorization: `Bearer ${req.user}` } })
+        .then(res => res.json())
+        .then(user => {
+            res.json(user.id)
+        })
+        .catch(err => res.redirect('/homepage?pleaselogin=true'))
 })
 
 module.exports = router
