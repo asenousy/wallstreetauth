@@ -1,15 +1,17 @@
-require('dotenv').config()
-var express = require('express')
-var path = require('path')
+const express = require('express')
+const path = require('path')
 const cookieSession = require('cookie-session')
-var bodyParser = require('body-parser')
-var hbs = require('hbs')
-var router = require('./routes/router')
-var authRoutes = require('./routes/authRoutes')
-var profileRoutes = require('./routes/profileRoutes')
+const bodyParser = require('body-parser')
+const hbs = require('hbs')
+const router = require('./routes/router')
+const authRoutes = require('./routes/authRoutes')
+const profileRoutes = require('./routes/profileRoutes')
 const passport = require('passport')
 
-var app = express()
+require('dotenv').config()
+require('./config/setupPassport')
+
+const app = express()
 const port = process.env.PORT || 3000
 
 app.use(cookieSession({
@@ -17,56 +19,26 @@ app.use(cookieSession({
   keys: [process.env.COOKIE_KEY]
 }))
 
-require('./setupPassport')
-
-app.use(passport.initialize())
-app.use(passport.session())
-
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
+app.use(passport.initialize())
+app.use(passport.session())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
 
 hbs.registerPartials(__dirname + '/views/partials')
 
-const loggedIn = (req, res, next) => {
-  if (req.query.code) {
-    next()
-  } else {
-    res.redirect('/homepage')
-  }
-}
-
-app.get('/',
-  loggedIn,
-  passport.authenticate('provider', {
-    successRedirect: '/profile',
-    failureRedirect: '/homepage'
-  }))
-
+app.use('/', router)
 app.use('/auth', authRoutes)
 app.use('/profile', profileRoutes)
 
-app.get('/homepage', (req, res) => {
-  res.render('homepage', {
-    loggedIn: req.user ? true : false,
-    pleaseLogin: req.query.pleaselogin
-  })
-})
-
-app.use(function (req, res, next) {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
-
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500)
+app.use(function (req, res) {
+  res.status(404)
   res.render('error', {
     message: 'oops',
-    error: err
+    error: new Error('Not Found')
   })
 })
 
