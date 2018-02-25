@@ -1,3 +1,4 @@
+require('dotenv').config()
 var express = require('express')
 var path = require('path')
 const cookieSession = require('cookie-session')
@@ -9,10 +10,11 @@ var profileRoutes = require('./routes/profileRoutes')
 const passport = require('passport')
 
 var app = express()
+const port = process.env.PORT || 3000
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
-  keys: ['cookiekey']
+  keys: [process.env.COOKIE_KEY]
 }))
 
 require('./setupPassport')
@@ -68,9 +70,8 @@ app.use(function (err, req, res, next) {
   })
 })
 
-
 if (require.main === module) {
-  app.listen(3000, () => console.log('listening on port 3000!'))
+  app.listen(port, () => console.log(`listening on port ${port}!`))
 } else {
-    module.exports = app
+  module.exports = app
 }

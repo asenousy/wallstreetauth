@@ -11,7 +11,7 @@ const authCheck = (req, res, next) => {
 }
 
 router.get('/', authCheck, (req, res) => {
-    fetch('https://staging-auth.wallstreetdocs.com/oauth/userinfo', { headers: { Authorization: `Bearer ${req.user}` } })
+    fetch(`${process.env.WSD_DOMAIN}/oauth/userinfo`, { headers: { Authorization: `Bearer ${req.user}` } })
         .then(res => res.json())
         .then(user => {
             res.render('userprofile', {
@@ -28,7 +28,7 @@ router.get('/', authCheck, (req, res) => {
 })
 
 router.get('/myid', authCheck, (req, res) => {
-    fetch('https://staging-auth.wallstreetdocs.com/oauth/userinfo', { headers: { Authorization: `Bearer ${req.user}` } })
+    fetch(`${process.env.WSD_DOMAIN}/oauth/userinfo`, { headers: { Authorization: `Bearer ${req.user}` } })
         .then(res => res.json())
         .then(user => {
             res.json(user.id)

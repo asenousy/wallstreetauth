@@ -10,11 +10,11 @@ passport.deserializeUser(function (token, done) {
 })
 
 passport.use('provider', new OAuth2Strategy({
-    authorizationURL: 'https://staging-auth.wallstreetdocs.com/oauth/authorize',
-    tokenURL: 'https://staging-auth.wallstreetdocs.com/oauth/token',
-    clientID: 'coding_test',
-    clientSecret: 'bwZm5XC6HTlr3fcdzRnD',
-    callbackURL: 'http://localhost:3000'
+    authorizationURL: `${process.env.WSD_DOMAIN}/oauth/authorize`,
+    tokenURL: `${process.env.WSD_DOMAIN}/oauth/token`,
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    callbackURL: `http://localhost:${process.env.PORT}`
 },
     function (accessToken, refreshToken, profile, done) {
         return done(null, accessToken)
