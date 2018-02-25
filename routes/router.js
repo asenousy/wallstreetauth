@@ -10,15 +10,4 @@ router.get('/user', function(req, res, next) {
   res.render('user');
 })
 
-
-
-// router.get('/auth/provider', passport.authenticate('provider'))
-
-// router.get('/auth/provider/callback',
-//   passport.authenticate('provider', {
-//     successRedirect: '/',
-//     failureRedirect: '/login'
-//   }))
-
-
 module.exports = router;

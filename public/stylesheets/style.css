@@ -1,8 +1,41 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+  /* margin:0;
+  padding:0;
+  height:100%; */
 }
 
 a {
   color: #00B7FF;
+}
+
+#icons {
+  position: absolute;
+  top: 25%;
+  width: 100%;
+}
+
+.icon {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}
+
+#body {
+  padding: 10px;
+  padding-bottom: 70px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 10px;
+  width: 90%;
+  height: 60px;
+  background:#00B7FF;
 }

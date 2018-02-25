@@ -18,3 +18,6 @@ Then('I should see nav bar', function() {
 Then('I should see a wallstreel login button', function() {
     expect($('#login').text()).to.equal('Log using Wallstreet Account')
 })
+Then('I should see a footer with {int} icons', function(amount) {
+    expect($('.icon').length).to.equal(amount)
+})

@@ -71,7 +71,10 @@ app.use(function (req, res, next) {
 
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', {
+    message: 'oops',
+    error: err
+  });
 });
 
 
