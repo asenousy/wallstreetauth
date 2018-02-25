@@ -1,4 +1,15 @@
-
+ {{> header loggedIn=loggedIn }}
 <h1>HomePage</h1>
-<a href="/auth/wallstreet">Log using Wallstreet</a>
-{{> footer}}
+<h3>Welcome ....</h3>
+{{#unless loggedIn}}
+<a id="login" href="/auth/wallstreet" class="btn btn-primary">Log using Wallstreet Account</a>
+<script>
+    $(document).ready(function () {
+        $("#dashboard").click(function (event) {
+            event.preventDefault()
+            $("#login").twist()
+        })
+    })
+</script>
+{{/unless}}
+

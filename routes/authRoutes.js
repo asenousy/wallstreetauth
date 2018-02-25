@@ -3,9 +3,8 @@ var router = express.Router()
 const passport = require('passport')
 
 router.get('/logout', function (req, res) {
-    res.send('log out');
-    // req.logout();
-    // res.redirect('/');
+    req.logout();
+    res.redirect('/homepage');
 })
 
 router.get('/wallstreet', passport.authenticate('provider'))

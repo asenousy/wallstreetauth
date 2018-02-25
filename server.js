@@ -57,7 +57,9 @@ app.use('/auth', authRoutes);
 app.use('/profile', profileRoutes);
 
 app.get('/homepage', (req, res) => {
-  res.render('homepage')
+  res.render('homepage', {
+    loggedIn: req.user ? true : false
+  })
 })
 
 app.use(function (req, res, next) {

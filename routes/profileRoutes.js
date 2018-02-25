@@ -14,10 +14,12 @@ router.get('/', authCheck, (req, res) => {
         .then(res => res.json())
         .then(user => {
             res.render('userprofile', {
+                loggedIn: true,
                 user: {
                     fullName: user.display_name,
                     userName: user.username,
-                    // email: user.email.find(email => email.type === 'default').value
+                    email: user.emails.find(email => email.type === 'default').value,
+                    organisation: user.organisation.name
                 }
             })
         })
