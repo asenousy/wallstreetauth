@@ -2,8 +2,17 @@
  {{> header loggedIn=loggedIn }}
 
  <div id="body">
-<h1>HomePage</h1>
-<h3>Welcome ....</h3>
+ <div class="jumbotron">
+<h1>Wall Street Docs</h1>
+</div>
+
+{{#if loggedIn}}
+    <h3>Welcome Member you are currently logged in</h3>
+{{else}}
+    <h3>Welcome Wall Street Docs</h3>
+{{/if}}
+
+<hr>
 {{#unless loggedIn}}
 
 <a id="login" href="/auth/wallstreet" class="btn btn-primary">Log using Wallstreet Account</a>

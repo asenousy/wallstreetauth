@@ -17,8 +17,6 @@ passport.use('provider', new OAuth2Strategy({
     callbackURL: 'http://localhost:3000'
 },
     function (accessToken, refreshToken, profile, done) {
-        console.log('accessToken = ', accessToken)
-        console.log('profile = ', profile)
         return done(null, accessToken)
     }
 ))
