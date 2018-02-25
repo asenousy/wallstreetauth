@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const fetch = require('node-fetch')
+const getEmail = require('../helpers/getEmail')
 
 const authCheck = (req, res, next) => {
     if (!req.user) {
@@ -18,7 +19,7 @@ router.get('/', authCheck, (req, res) => {
                 user: {
                     fullName: user.display_name,
                     userName: user.username,
-                    email: user.emails.find(email => email.type === 'default').value,
+                    email: getEmail(user.emails),
                     organisation: user.organisation.name
                 }
             })
