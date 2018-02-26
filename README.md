@@ -18,9 +18,11 @@ If you click on login button you will be redirected to WSD login screen to use y
 
 ## Aproaches used
 
-I have handlebars for rendering pages and took advantage of partials to avoid repeated code and passed in flags through partials to render differently based on page
+Bootstrap was used as my CSS framework
 
-I created a jqery plugin elements the capabilty to twist around 
+I have used handlebars for rendering pages and took advantage of partials to avoid repeated code and passed in flags through partials to render differently based on page
+
+I created a jqery plugin that gives elements the capabilty to twist around
 
 Along side passport.js oauth2, i used `cookie-session` to store the token on client side
 
